@@ -1,3 +1,5 @@
+package com.restaurant;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Restaurant {
     public List<MenuItem> sortByPrice(boolean ascending) {
         return menu.stream()
                 .sorted(ascending ? Comparator.comparingDouble(MenuItem::getPrice)
-                                  : Comparator.comparingDouble(MenuItem::getPrice).reversed())
+                        : Comparator.comparingDouble(MenuItem::getPrice).reversed())
                 .collect(Collectors.toList());
     }
 
