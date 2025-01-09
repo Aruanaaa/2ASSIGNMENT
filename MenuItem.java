@@ -1,3 +1,5 @@
+package com.restaurant;
+
 import java.util.Objects;
 
 public class MenuItem {
@@ -22,14 +24,9 @@ public class MenuItem {
     public double getPrice() {
         return price;
     }
+
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public static void setPrice(MenuItem[] items, double price) {
-        for (MenuItem item : items) {
-            item.price = price;
-        }
     }
 
     public String getCategory() {
@@ -64,3 +61,4 @@ public class MenuItem {
         return Objects.hash(name, price, category);
     }
 }
+
