@@ -1,3 +1,5 @@
+package com.restaurant;
+
 import java.util.Arrays;
 
 public class Order {
@@ -48,40 +50,40 @@ public class Order {
                 ", total=" + calculateTotal() +
                 '}';
     }
-}
 
-class DineInOrder extends Order {
-    private String tableNumber;
+    public static class DineInOrder extends Order {
+        private String tableNumber;
 
-    public DineInOrder(int orderId, String customerName, MenuItem[] items, String tableNumber) {
-        super(orderId, customerName, items);
-        this.tableNumber = tableNumber;
+        public DineInOrder(int orderId, String customerName, MenuItem[] items, String tableNumber) {
+            super(orderId, customerName, items);
+            this.tableNumber = tableNumber;
+        }
+
+        public String getTableNumber() {
+            return tableNumber;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + ", Table Number='" + tableNumber + "'";
+        }
     }
 
-    public String getTableNumber() {
-        return tableNumber;
-    }
+    public static class TakeawayOrder extends Order {
+        private String pickupTime;
 
-    @Override
-    public String toString() {
-        return super.toString() + ", Table Number='" + tableNumber + "'";
-    }
-}
+        public TakeawayOrder(int orderId, String customerName, MenuItem[] items, String pickupTime) {
+            super(orderId, customerName, items);
+            this.pickupTime = pickupTime;
+        }
 
-class TakeawayOrder extends Order {
-    private String pickupTime;
+        public String getPickupTime() {
+            return pickupTime;
+        }
 
-    public TakeawayOrder(int orderId, String customerName, MenuItem[] items, String pickupTime) {
-        super(orderId, customerName, items);
-        this.pickupTime = pickupTime;
-    }
-
-    public String getPickupTime() {
-        return pickupTime;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + ", Pickup Time='" + pickupTime + "'";
+        @Override
+        public String toString() {
+            return super.toString() + ", Pickup Time='" + pickupTime + "'";
+        }
     }
 }
