@@ -1,16 +1,22 @@
-package com.restaurant;
-
-import java.util.Objects;
-
 public class MenuItem {
+    private int id;  // Добавлено поле id для базы данных
     private String name;
     private double price;
     private String category;
 
-    public MenuItem(String name, double price, String category) {
+    public MenuItem(int id, String name, double price, String category) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -40,7 +46,8 @@ public class MenuItem {
     @Override
     public String toString() {
         return "MenuItem{" +
-                "name='" + name + '\'' +
+                "id=" + id + 
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 ", category='" + category + '\'' +
                 '}';
@@ -52,13 +59,13 @@ public class MenuItem {
         if (o == null || getClass() != o.getClass()) return false;
         MenuItem menuItem = (MenuItem) o;
         return Double.compare(menuItem.price, price) == 0 &&
+                id == menuItem.id &&
                 Objects.equals(name, menuItem.name) &&
                 Objects.equals(category, menuItem.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, category);
+        return Objects.hash(id, name, price, category);
     }
 }
-
