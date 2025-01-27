@@ -1,15 +1,17 @@
 package com.restaurant;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class RestaurantOrderManagement {
     public static void main(String[] args) {
         Restaurant restaurant = new Restaurant("Tasty Bites", "123 Main Street");
 
-        restaurant.addMenuItem(new MenuItem("Burger", 5.99, "Main Course"));
-        restaurant.addMenuItem(new MenuItem("Fries", 2.99, "Side"));
-        restaurant.addMenuItem(new MenuItem("Coke", 1.99, "Drink"));
-        restaurant.addMenuItem(new MenuItem("Salad", 4.99, "Appetizer"));
+        // Добавление нескольких элементов в меню (данные добавляются в базу)
+        restaurant.addMenuItem(new MenuItem(0, "Burger", 5.99, "Main Course"));
+        restaurant.addMenuItem(new MenuItem(0, "Fries", 2.99, "Side"));
+        restaurant.addMenuItem(new MenuItem(0, "Coke", 1.99, "Drink"));
+        restaurant.addMenuItem(new MenuItem(0, "Salad", 4.99, "Appetizer"));
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -27,22 +29,26 @@ public class RestaurantOrderManagement {
             switch (choice) {
                 case 1:
                     System.out.println("Menu:");
-                    System.out.println(restaurant);
+                    List<MenuItem> menuItems = restaurant.getMenuItemsFromDb();  // Получаем меню из базы данных
+                    menuItems.forEach(System.out::println);
                     break;
                 case 2:
                     System.out.print("Enter category to filter: ");
                     String category = scanner.nextLine();
-                    restaurant.filterByCategory(category).forEach(System.out::println);
+                    List<MenuItem> filteredItems = restaurant.filterByCategory(category);
+                    filteredItems.forEach(System.out::println);
                     break;
                 case 3:
                     System.out.print("Enter name to search: ");
                     String name = scanner.nextLine();
-                    restaurant.searchByName(name).forEach(System.out::println);
+                    List<MenuItem> searchedItems = restaurant.searchByName(name);
+                    searchedItems.forEach(System.out::println);
                     break;
                 case 4:
                     System.out.print("Sort by price (true for ascending, false for descending): ");
                     boolean ascending = scanner.nextBoolean();
-                    restaurant.sortByPrice(ascending).forEach(System.out::println);
+                    List<MenuItem> sortedItems = restaurant.sortByPrice(ascending);
+                    sortedItems.forEach(System.out::println);
                     break;
                 case 5:
                     System.out.println("Exiting...");
